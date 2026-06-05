@@ -14,10 +14,6 @@
             -webkit-box-sizing: border-box;
             box-sizing: border-box;
             font-size: 62.5%;
-            /* 字型大小16px，乘62.5% = 10px。
-            之後 1.8rem 就能直接換算18px，
-            在最下方的 @media 媒體查詢中，只需要改 html 的字體大小，
-            整個網頁的元件就會等比例縮放 */
         }
 
         *,
@@ -74,12 +70,6 @@
             color: rgba(255, 255, 255, 0.7);
         }
 
-        .modify-input {
-            background: rgba(255, 255, 255, 0.4);
-            color: #666;
-            width: 30rem;
-        }
-
         .add {
             font-size: 3rem;
             line-height: 3rem;
@@ -102,6 +92,7 @@
             transform: translate(1px, 1px);
         }
 
+        /* 未完成時的打勾圖標顏色（淡白色） */
         .done {
             color: rgba(255, 255, 255, 0.9);
             text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.4);
@@ -109,8 +100,9 @@
             margin-right: 2rem;
         }
 
+        /* 已完成時的打勾圖標顏色（深灰色） */
         .done-check .done {
-            color: #515151;
+            color: #515151 !important;
         }
 
         .done-check {
@@ -124,7 +116,7 @@
 
         /* 完成任務時的刪除線效果 */
         .done-check .task-name {
-            text-decoration: line-through;
+            text-decoration: line-through !important;
             color: #777;
         }
 
@@ -154,7 +146,6 @@
             margin-bottom: 4rem;
             background: #f0d7b6;
             clip-path: polygon(0 50%, 7% 0, 100% 0, 100% 100%, 7% 100%, 0 50%);
-            /* ▲ 剪裁路徑 */
             position: relative;
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
@@ -323,8 +314,9 @@
             padding-left: 5px;
         }
 
+        /* 刪除動畫 */
         .delete-animation {
-            animation: deleting 1s;
+            animation: deleting 0.5s forwards;
         }
 
         @keyframes deleting {
@@ -333,14 +325,12 @@
                 opacity: 1;
             }
 
-            80% {
+            100% {
                 transform: scale(0.1);
                 opacity: 0;
-            }
-
-            100% {
-                opacity: 0;
-                visibility: hidden;
+                height: 0;
+                padding: 0;
+                margin: 0;
             }
         }
 
@@ -357,23 +347,12 @@
             box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
         }
 
-        .private {
-            background: #89a3b2;
-            color: #fff;
-        }
-
-        .work {
-            background: #b2d3be;
-        }
-
-        .family {
-            background: #f2f4d1;
-        }
-
-        .learning {
-            background: #f3826f;
-            color: #fff;
-        }
+        .private { background: #89a3b2; color: #fff; }
+        .work { background: #b2d3be; }
+        .family { background: #f2f4d1; }
+        .learning { background: #f3826f; color: #fff; }
+        /* 修正與學習標籤(study/learning) class 對應 */
+        .study { background: #f3826f; color: #fff; }
 
         .select {
             display: inline-block;
@@ -423,78 +402,16 @@
             background: #dddabd;
         }
 
-        .footer {
-            font-size: 1.5rem;
-            text-align: center;
-            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
-            letter-spacing: 1px;
-            margin-bottom: 1.5rem;
-            margin-top: 10rem;
-            height: 5rem;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        .footer span {
-            font-size: 1.4rem;
-        }
-
-        .footer i {
-            margin: 0 1rem;
-            color: rgb(173, 79, 79);
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.17);
-        }
-
-        @media only screen and (max-width: 1024px) {
-            html {
-                font-size: 50%;
-            }
-        }
-
-        @media only screen and (max-width: 768px) {
-            .center {
-                width: 70vw;
-            }
-        }
-
+        @media only screen and (max-width: 1024px) { html { font-size: 50%; } }
+        @media only screen and (max-width: 768px) { .center { width: 70vw; } }
         @media only screen and (max-width: 480px) {
-            html {
-                font-size: 35%;
-            }
-
-            .center {
-                width: 80vw;
-            }
-
-            .list-task {
-                margin-top: 1rem;
-            }
-
-            .list-tag {
-                display: block;
-                margin-bottom: 0.5rem;
-            }
-
-            .hero-title {
-                clip-path: polygon(0 50%, 10% 0, 100% 0, 100% 100%, 10% 100%, 0 50%);
-            }
-
-            .hero-title::before {
-                width: 2rem;
-                height: 2rem;
-                top: 50%;
-                left: 0;
-                transform: translateY(-50%);
-            }
-
-            .hero-title::after {
-                width: 4rem;
-                background: #daa592;
-                position: absolute;
-                right: 0;
-            }
+            html { font-size: 35%; }
+            .center { width: 80vw; }
+            .list-task { margin-top: 1rem; }
+            .list-tag { display: block; margin-bottom: 0.5rem; }
+            .hero-title { clip-path: polygon(0 50%, 10% 0, 100% 0, 100% 100%, 10% 100%, 0 50%); }
+            .hero-title::before { width: 2rem; height: 2rem; top: 50%; left: 0; transform: translateY(-50%); }
+            .hero-title::after { width: 4rem; background: #daa592; position: absolute; right: 0; }
         }
     </style>
 </head>
@@ -541,15 +458,12 @@
         const tagList = document.querySelector('.tag-row');
         const typeList = document.getElementById('task-type');
         const taskList = JSON.parse(localStorage.getItem('task')) || [];
-        //字串還原 JavaScript 的陣列
 
         let currentTag = localStorage.usedTag || 'private';
         let selectFilter = 'all';
 
-        // 更新 LocalStorage 並重新渲染畫面
         const saveAndRender = () => {
             localStorage.setItem('task', JSON.stringify(taskList));
-            // ▲ 陣列物件轉字串
             localStorage.usedTag = currentTag;
             printList();
         };
@@ -564,10 +478,8 @@
 
         // 渲染畫面
         const printList = () => {
-            // 1. 根據分類篩選資料
             const filteredTasks = taskList.filter(item => selectFilter === 'all' || item.tag === selectFilter);
 
-            // 產出 HTML 字串並渲染 樣版字串:反引號 `
             myList.innerHTML = filteredTasks.length ? filteredTasks.map((item, index) => `
         <li class="${item.done ? 'done-check' : ''}" data-num="${taskList.indexOf(item)}">
             <div class="list-task">
@@ -582,22 +494,22 @@
         </li>
     `).join('') : `<p style="color: #aaa; margin: 0 0 1.5rem 0;">No task here...</p>`;
 
-            // 控制「刪除全部」按鈕顯示
             document.querySelector('.delete-all').style.display = filteredTasks.length > 1 ? 'inline-block' : 'none';
         };
-        // 標籤切換（新增任務用的標籤）
+
         const initTag = () => {
             document.querySelectorAll('.tag').forEach(el => {
                 el.classList.toggle('tag-select', el.textContent === currentTag);
             });
         };
+
         tagList.addEventListener('click', (e) => {
             if (e.target.nodeName !== 'SPAN') return;
             currentTag = e.target.textContent;
             initTag();
             localStorage.usedTag = currentTag;
         });
-        // 新增任務
+
         const addNewTask = () => {
             const taskInput = document.querySelector('.task-input');
             if (!taskInput.value.trim()) return;
@@ -606,23 +518,27 @@
             taskInput.value = '';
             saveAndRender();
         };
-        // 處理清單點擊（完成、修改、刪除）
+
+        // 【核心修正】精準處理清單點擊，避免事件互卡
         myList.addEventListener('click', (e) => {
             const targetLi = e.target.closest('li');
-            //不論點到的是勾勾、文字還是外框，.closest('li') 都會自動向上尋找最近的 <li> 祖先元素。
-            // 接著透過 targetLi.dataset.num 就能知道使用者到底是在操作哪一個陣列索引（index）的任務。
             if (!targetLi) return;
             const index = targetLi.dataset.num;
             const taskSpan = targetLi.querySelector('.task-name');
 
-            // 刪除
+            // 1. 點擊刪除垃圾桶
             if (e.target.classList.contains('delete')) {
+                e.stopPropagation();
                 targetLi.classList.add('delete-animation');
-                setTimeout(() => { taskList.splice(index, 1); saveAndRender(); }, 600);
+                setTimeout(() => { 
+                    taskList.splice(index, 1); 
+                    saveAndRender(); 
+                }, 500); // 動畫時間改為0.5秒更流暢
             }
-            // 修改 (利用 contentEditable 點擊直接改文字)
+            // 2. 點擊修改畫筆
             else if (e.target.classList.contains('modify')) {
-                if (targetLi.classList.contains('done-check')) return;
+                e.stopPropagation();
+                if (targetLi.classList.contains('done-check')) return; // 已完成項目不能修改
                 taskSpan.contentEditable = true;
                 taskSpan.focus();
                 taskSpan.onblur = () => {
@@ -631,8 +547,9 @@
                     saveAndRender();
                 };
             }
-            // 切換完成狀態
-            else if (!taskSpan.contentEditable || taskSpan.contentEditable === 'false') {
+            // 3. 點擊打勾圖標（精準指定點到 .done 圓圈才觸發打勾和刪除線）
+            else if (e.target.classList.contains('done')) {
+                e.stopPropagation();
                 taskList[index].done = !taskList[index].done;
                 saveAndRender();
             }
@@ -644,7 +561,6 @@
             for (let i = taskList.length - 1; i >= 0; i--) {
                 if (selectFilter === 'all' || taskList[i].tag === selectFilter) taskList.splice(i, 1);
             }
-            // ▲ 刪除了索引 0 的資料，故索引 1 的資料會往前遞補變成 0，但迴圈接下來會去檢查 1，會導致被遞補的那筆資料被漏掉，所以從後往前刪除就不會影響前面尚未檢查的資料索引！
             saveAndRender();
         });
 
@@ -659,13 +575,17 @@
         });
 
         document.body.addEventListener('click', () => document.querySelector('.type-selector').classList.add('hide'), true);
-        document.body.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.target.classList.contains('task-input')) addNewTask(); });
+        addTaskBtn.addEventListener('click', addNewTask);
+        
+        document.body.addEventListener('keydown', (e) => { 
+            if (e.key === 'Enter' && e.target.classList.contains('task-input')) {
+                addNewTask(); 
+            }
+        });
 
         // 初始化
         initTag();
         printList();
     </script>
-
 </body>
-
 </html>
